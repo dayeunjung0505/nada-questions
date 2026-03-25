@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나다 자기탐색 질문지 30선</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Serif KR', serif;
+    background: #F7F3EE;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .brand {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #7A9E87;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #2D5A3D;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #9B8B7A;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 24px rgba(45,90,61,0.07);
+    animation: fadeUp 0.6s ease 0.1s both;
+    transition: transform 0.2s ease;
+  }
+
+  .card-top {}
+
+  .cat-badge {
+    display: inline-block;
+    font-size: 11px;
+    color: #2D5A3D;
+    background: #EAF3DE;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .q-num {
+    font-size: 11px;
+    color: #C4B49A;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+  }
+
+  .q-text {
+    font-size: 19px;
+    font-weight: 400;
+    color: #2C2C2A;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+  }
+
+  .card-bottom {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .leaf {
+    font-size: 16px;
+    color: #7A9E87;
+  }
+
+  .progress-text {
+    font-size: 12px;
+    color: #C4B49A;
+    letter-spacing: 1px;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .nav-btn {
+    background: transparent;
+    border: 0.5px solid #C4B49A;
+    border-radius: 50px;
+    padding: 10px 28px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    color: #5F5E5A;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-btn:hover { background: #F0EBE3; border-color: #9B8B7A; }
+  .nav-btn:disabled { color: #D3D1C7; border-color: #E8E4DE; cursor: default; background: transparent; }
+
+  .dots {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 200px;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #D3D1C7;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .dot.active { background: #2D5A3D; transform: scale(1.4); }
+  .dot.done { background: #9B8B7A; }
+
+  .footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 11px;
+    color: #C4B49A;
+    letter-spacing: 2px;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-out {
+    animation: slideOut 0.2s ease forwards;
+  }
+
+  .slide-in {
+    animation: slideIn 0.25s ease forwards;
+  }
+
+  @keyframes slideOut {
+    to { opacity: 0; transform: translateX(-20px); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="brand">NA : DA</div>
+    <div class="title">나다 자기탐색 질문지 30선</div>
+    <div class="subtitle">천천히, 떠오르는 대로 답해보세요</div>
+  </div>
+
+  <div class="card" id="card">
+    <div class="card-top">
+      <div class="cat-badge" id="cat"></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+    </div>
+    <div class="card-bottom">
+      <div class="leaf">🌿</div>
+      <div class="progress-text" id="prog"></div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn" id="prev" onclick="move(-1)">← 이전</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav-btn" id="next" onclick="move(1)">다음 →</button>
+  </div>
+
+  <div class="footer">나를 발견하고, 표현하고, 나다운 삶을 설계하는 공간</div>
+</div>
+
+<script>
+const questions = [
+  { cat: "감정과 반응", text: "오늘 하루 중 가장 에너지가 올라간 순간은 언제였나요?" },
+  { cat: "감정과 반응", text: "어떤 상황에서 나도 모르게 시간 가는 줄 모르고 빠져드나요?" },
+  { cat: "감정과 반응", text: "최근 가장 기분 좋았던 순간을 떠올려보세요. 그때 나는 뭘 하고 있었나요?" },
+  { cat: "감정과 반응", text: "가장 금방 지치고 소진되는 상황은 어떤 건가요?" },
+  { cat: "감정과 반응", text: "누군가에게 칭찬받았을 때 가장 기뻤던 말은 무엇인가요?" },
+  { cat: "가치와 기준", text: "돈이 없어도 계속 하고 싶은 일이 있다면 무엇인가요?" },
+  { cat: "가치와 기준", text: "나는 어떤 사람을 보면 진심으로 멋있다고 느끼나요?" },
+  { cat: "가치와 기준", text: "절대 타협할 수 없는 나만의 기준이 있다면 무엇인가요?" },
+  { cat: "가치와 기준", text: "지금 내 삶에서 가장 중요하게 여기는 것 세 가지는?" },
+  { cat: "가치와 기준", text: "사실 별로 중요하지 않은데 중요한 척하고 있는 건 없나요?" },
+  { cat: "패턴과 습관", text: "나는 어떤 환경에서 가장 잘 집중하나요?" },
+  { cat: "패턴과 습관", text: "스트레스를 받을 때 나도 모르게 하는 행동은 무엇인가요?" },
+  { cat: "패턴과 습관", text: "아침에 눈을 떴을 때 제일 먼저 드는 생각은 뭔가요?" },
+  { cat: "패턴과 습관", text: "나는 혼자 있을 때 충전되나요, 사람들과 함께 있을 때 충전되나요?" },
+  { cat: "패턴과 습관", text: "가장 오래 꾸준히 해온 것이 있다면 무엇인가요?" },
+  { cat: "관계와 역할", text: "주변 사람들이 나에게 가장 자주 부탁하는 것은 무엇인가요?" },
+  { cat: "관계와 역할", text: "나는 어떤 사람 곁에 있을 때 가장 나다운 것 같나요?" },
+  { cat: "관계와 역할", text: "어떤 사람 앞에서 가장 나답지 못한 것 같나요?" },
+  { cat: "관계와 역할", text: "내가 누군가에게 가장 잘 해줄 수 있는 것은 무엇인가요?" },
+  { cat: "관계와 역할", text: "나는 어떤 사람으로 기억되고 싶나요?" },
+  { cat: "욕구와 바람", text: "지금 당장 아무 제약이 없다면 가장 먼저 하고 싶은 것은?" },
+  { cat: "욕구와 바람", text: "어릴 때 가장 좋아했던 것 중 지금도 여전히 좋아하는 게 있나요?" },
+  { cat: "욕구와 바람", text: "요즘 가장 자주 드는 감정은 무엇인가요?" },
+  { cat: "욕구와 바람", text: "지금 내 삶에서 가장 채워지지 않은 것은 무엇인가요?" },
+  { cat: "욕구와 바람", text: "나는 어떤 순간에 '나 잘 살고 있다'는 느낌을 받나요?" },
+  { cat: "두려움과 한계", text: "하고 싶은데 계속 미루고 있는 것이 있다면 무엇인가요?" },
+  { cat: "두려움과 한계", text: "남들은 쉽게 하는 것 같은데 나는 유독 어려운 것이 있나요?" },
+  { cat: "두려움과 한계", text: "가장 두려운 상황을 한 문장으로 표현하면?" },
+  { cat: "두려움과 한계", text: "나를 가장 작아지게 만드는 말이나 상황은 무엇인가요?" },
+  { cat: "두려움과 한계", text: "지금의 나에게 해주고 싶은 말이 있다면 무엇인가요?" },
+];
+
+let cur = 0;
+
+function render(animate) {
+  const q = questions[cur];
+  const card = document.getElementById('card');
+
+  if (animate) {
+    card.classList.add('slide-out');
+    setTimeout(() => {
+      update(q);
+      card.classList.remove('slide-out');
+      card.classList.add('slide-in');
+      setTimeout(() => card.classList.remove('slide-in'), 300);
+    }, 200);
+  } else {
+    update(q);
+  }
+}
+
+function update(q) {
+  document.getElementById('cat').textContent = q.cat;
+  document.getElementById('qnum').textContent = 'Q ' + String(cur + 1).padStart(2, '0');
+  document.getElementById('qtext').textContent = q.text;
+  document.getElementById('prog').textContent = (cur + 1) + ' / ' + questions.length;
+  document.getElementById('prev').disabled = cur === 0;
+  document.getElementById('next').disabled = cur === questions.length - 1;
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i === cur) d.classList.add('active');
+    else if (i < cur) d.classList.add('done');
+  });
+}
+
+function move(dir) {
+  cur = Math.max(0, Math.min(questions.length - 1, cur + dir));
+  render(true);
+}
+
+const dotsEl = document.getElementById('dots');
+questions.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot';
+  d.onclick = () => { cur = i; render(true); };
+  dotsEl.appendChild(d);
+});
+
+render(false);
+</script>
+</body>
+</html>
